@@ -217,11 +217,6 @@ def main() -> None:
         profile.unlink()
 
     environment["CARGO_INCREMENTAL"] = "0"
-    if target.endswith("-apple-darwin"):
-        for variable in ("CFLAGS", "CXXFLAGS"):
-            environment[variable] = append_flags(
-                environment.get(variable), "-fno-profile-generate -fno-profile-use"
-            )
 
     instrumented_target_dir = target_dir / "instrumented"
     instrumented_environment = environment | {

@@ -163,9 +163,6 @@ jobs:
           args: --release --locked --out dist --compatibility pypi
         env:
           RUSTFLAGS: "${{ env.RUSTFLAGS }} -Cprofile-use=${{ github.workspace }}/target/ruff-pgo/ruff.profdata"
-          # Apple Clang cannot consume profile data from rustc's LLVM version.
-          CFLAGS: "-fno-profile-generate -fno-profile-use"
-          CXXFLAGS: "-fno-profile-generate -fno-profile-use"
       - name: "Test wheel - aarch64"
         run: |
           pip install dist/"${PACKAGE_NAME}"-*.whl --force-reinstall
